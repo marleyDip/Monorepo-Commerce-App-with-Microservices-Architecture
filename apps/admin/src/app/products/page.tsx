@@ -110,7 +110,7 @@ const ProductsPage = async () => {
   const data = await getData();
 
   return (
-    <div className="w-full px-0 sm:px-4 lg:px-8 pb-4">
+    <div className="w-full px-0 sm:px-4 lg:px-8 pb-2">
       {/* Header Section */}
       <div className="mb-6 sm:mb-8 p-2 sm:p-4 bg-secondary rounded-md">
         <h1 className="text-base sm:text-lg md:text-xl font-semibold text-center sm:text-left">
