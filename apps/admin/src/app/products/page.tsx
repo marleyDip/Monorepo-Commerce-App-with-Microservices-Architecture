@@ -110,7 +110,7 @@ const ProductsPage = async () => {
   const data = await getData();
 
   return (
-    <div className="w-full px-0 sm:px-4 lg:px-8">
+    <div className="w-full px-0 sm:px-4 lg:px-8 pb-4">
       {/* Header Section */}
       <div className="mb-6 sm:mb-8 p-2 sm:p-4 bg-secondary rounded-md">
         <h1 className="text-base sm:text-lg md:text-xl font-semibold text-center sm:text-left">
@@ -119,7 +119,7 @@ const ProductsPage = async () => {
       </div>
 
       {/* Responsive Table Wrapper */}
-      <div className="overflow-x-auto rounded-lg shadow-lg border border-gray-200 dark:border-gray-800">
+      <div className="overflow-x-auto rounded-lg shadow-xl border border-gray-200 dark:border-gray-800">
         <DataTable columns={columns} data={data} />
       </div>
     </div>
