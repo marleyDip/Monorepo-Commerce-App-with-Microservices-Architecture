@@ -1,0 +1,287 @@
+import { Payment, columns } from "./columns";
+import { DataTable } from "./data-table";
+
+const getData = async (): Promise<Payment[]> => {
+  return [
+    {
+      id: "728ed521",
+      userId: "23",
+      amount: 134,
+      status: "pending",
+      fullName: "Md Sofian Hasan",
+      email: "sofian.hasan@gmail.com",
+    },
+    {
+      id: "728ed522",
+      userId: "24",
+      amount: 124,
+      status: "success",
+      fullName: "Arif Hossain",
+      email: "arif.hossain@gmail.com",
+    },
+    {
+      id: "728ed523",
+      userId: "25",
+      amount: 167,
+      status: "failed",
+      fullName: "Nusrat Jahan",
+      email: "nusrat.jahan@gmail.com",
+    },
+    {
+      id: "728ed524",
+      userId: "26",
+      amount: 145,
+      status: "pending",
+      fullName: "Tanvir Ahmed",
+      email: "tanvir.ahmed@gmail.com",
+    },
+    {
+      id: "728ed525",
+      userId: "27",
+      amount: 190,
+      status: "failed",
+      fullName: "Shaila Akter",
+      email: "shaila.akter@gmail.com",
+    },
+    {
+      id: "728ed526",
+      userId: "28",
+      amount: 210,
+      status: "success",
+      fullName: "Raihan Chowdhury",
+      email: "raihan.chowdhury@gmail.com",
+    },
+    {
+      id: "728ed527",
+      userId: "29",
+      amount: 98,
+      status: "pending",
+      fullName: "Labiba Rahman",
+      email: "labiba.rahman@gmail.com",
+    },
+    {
+      id: "728ed528",
+      userId: "30",
+      amount: 132,
+      status: "success",
+      fullName: "Imran Khan",
+      email: "imran.khan@gmail.com",
+    },
+    {
+      id: "728ed529",
+      userId: "31",
+      amount: 178,
+      status: "failed",
+      fullName: "Fatema Begum",
+      email: "fatema.begum@gmail.com",
+    },
+    {
+      id: "728ed530",
+      userId: "32",
+      amount: 145,
+      status: "pending",
+      fullName: "Sabbir Hossain",
+      email: "sabbir.hossain@gmail.com",
+    },
+    {
+      id: "728ed531",
+      userId: "33",
+      amount: 123,
+      status: "success",
+      fullName: "Tania Islam",
+      email: "tania.islam@gmail.com",
+    },
+    {
+      id: "728ed532",
+      userId: "34",
+      amount: 187,
+      status: "success",
+      fullName: "Rashedul Karim",
+      email: "rashedul.karim@gmail.com",
+    },
+    {
+      id: "728ed533",
+      userId: "35",
+      amount: 160,
+      status: "pending",
+      fullName: "Nusrat Khanam",
+      email: "nusrat.khanam@gmail.com",
+    },
+    {
+      id: "728ed534",
+      userId: "36",
+      amount: 135,
+      status: "success",
+      fullName: "Shakib Al Hasan",
+      email: "shakib.alhasan@gmail.com",
+    },
+    {
+      id: "728ed535",
+      userId: "37",
+      amount: 195,
+      status: "success",
+      fullName: "Anika Sultana",
+      email: "anika.sultana@gmail.com",
+    },
+    {
+      id: "728ed536",
+      userId: "38",
+      amount: 110,
+      status: "pending",
+      fullName: "Fahim Rahman",
+      email: "fahim.rahman@gmail.com",
+    },
+    {
+      id: "728ed537",
+      userId: "39",
+      amount: 142,
+      status: "success",
+      fullName: "Samira Akter",
+      email: "samira.akter@gmail.com",
+    },
+    {
+      id: "728ed538",
+      userId: "40",
+      amount: 170,
+      status: "success",
+      fullName: "Rony Chowdhury",
+      email: "rony.chowdhury@gmail.com",
+    },
+    {
+      id: "728ed539",
+      userId: "41",
+      amount: 150,
+      status: "pending",
+      fullName: "Farhana Karim",
+      email: "farhana.karim@gmail.com",
+    },
+    {
+      id: "728ed540",
+      userId: "42",
+      amount: 125,
+      status: "success",
+      fullName: "Joynal Abedin",
+      email: "joynal.abedin@gmail.com",
+    },
+    {
+      id: "728ed541",
+      userId: "43",
+      amount: 185,
+      status: "success",
+      fullName: "Mousumi Rahman",
+      email: "mousumi.rahman@gmail.com",
+    },
+    {
+      id: "728ed542",
+      userId: "44",
+      amount: 140,
+      status: "pending",
+      fullName: "Rafiq Ahmed",
+      email: "rafiq.ahmed@gmail.com",
+    },
+    {
+      id: "728ed543",
+      userId: "45",
+      amount: 155,
+      status: "success",
+      fullName: "Salma Akter",
+      email: "salma.akter@gmail.com",
+    },
+    {
+      id: "728ed544",
+      userId: "46",
+      amount: 180,
+      status: "success",
+      fullName: "Tariq Hossain",
+      email: "tariq.hossain@gmail.com",
+    },
+    {
+      id: "728ed545",
+      userId: "47",
+      amount: 130,
+      status: "pending",
+      fullName: "Rumana Begum",
+      email: "rumana.begum@gmail.com",
+    },
+    {
+      id: "728ed546",
+      userId: "48",
+      amount: 165,
+      status: "success",
+      fullName: "Fahad Chowdhury",
+      email: "fahad.chowdhury@gmail.com",
+    },
+    {
+      id: "728ed547",
+      userId: "49",
+      amount: 200,
+      status: "success",
+      fullName: "Nabila Khan",
+      email: "nabila.khan@gmail.com",
+    },
+    {
+      id: "728ed548",
+      userId: "50",
+      amount: 120,
+      status: "pending",
+      fullName: "Rashidul Islam",
+      email: "rashidul.islam@gmail.com",
+    },
+    {
+      id: "728ed549",
+      userId: "51",
+      amount: 138,
+      status: "success",
+      fullName: "Shamima Rahman",
+      email: "shamima.rahman@gmail.com",
+    },
+    {
+      id: "728ed550",
+      userId: "52",
+      amount: 175,
+      status: "success",
+      fullName: "Aminul Haque",
+      email: "aminul.haque@gmail.com",
+    },
+    {
+      id: "728ed551",
+      userId: "53",
+      amount: 145,
+      status: "pending",
+      fullName: "Nafisa Akter",
+      email: "nafisa.akter@gmail.com",
+    },
+    {
+      id: "728ed552",
+      userId: "54",
+      amount: 160,
+      status: "success",
+      fullName: "Saifur Rahman",
+      email: "saifur.rahman@gmail.com",
+    },
+    {
+      id: "728ed553",
+      userId: "55",
+      amount: 190,
+      status: "success",
+      fullName: "Fariha Khanam",
+      email: "fariha.khanam@gmail.com",
+    },
+  ];
+};
+
+const PaymentsPage = async () => {
+  const data = await getData();
+
+  return (
+    <div className="">
+      <div className="mb-8 p-4 bg-secondary rounded-md">
+        <h1 className="font-semibold">All Payments</h1>
+      </div>
+
+      <DataTable columns={columns} data={data} />
+    </div>
+  );
+};
+
+export default PaymentsPage;
