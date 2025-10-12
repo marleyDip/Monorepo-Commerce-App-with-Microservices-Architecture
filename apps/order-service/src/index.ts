@@ -2,6 +2,10 @@ import Fastify from "fastify";
 
 const fastify = Fastify();
 
+fastify.get("/", (request, reply) => {
+  return reply.send("Order endpoint works!");
+});
+
 /**
  * Run the server! with async/await
  */
