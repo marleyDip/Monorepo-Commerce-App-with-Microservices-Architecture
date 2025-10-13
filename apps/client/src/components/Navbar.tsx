@@ -4,13 +4,7 @@ import React from "react";
 import SearchBar from "./SearchBar";
 import { Bell, Home } from "lucide-react";
 import ShoppingCartIcon from "./ShoppingCartIcon";
-import {
-  SignedOut,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  UserButton,
-} from "@clerk/nextjs";
+import { SignedOut, SignInButton, SignedIn, UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
   return (
@@ -42,37 +36,36 @@ const Navbar = () => {
         </Link>
         {/* Dashboard */}
 
-        {/* Add to Cart */}
+        {/* Notification */}
         <Bell className="w-4 h-4 text-gray-600 hover:text-black cursor-pointer" />
+        {/* Notification */}
 
+        {/* Add to Cart */}
         <ShoppingCartIcon />
         {/* Add to Cart */}
 
-        {/* Clerk */}
+        {/* Sign In */}
         <SignedOut>
           <SignInButton />
-
-          <SignUpButton>
-            <button className="bg-[#6c47ff] text-ceramic-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
-              Sign Up
-            </button>
-          </SignUpButton>
         </SignedOut>
+        {/* Sign In */}
 
+        {/* Sign Out */}
         <SignedIn>
           <UserButton />
         </SignedIn>
-        {/* Clerk */}
-
-        <Link
-          href="/login"
-          className="relative font-medium text-gray-600 transition-all duration-300 hover:bg-gradient-to-r hover:from-teal-600 hover:to-red-600  hover:bg-clip-text hover:text-transparent after:content-[''] after:absolute after:left-1/2 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-teal-500 after:to-red-500 after:transition-all after:duration-300 hover:after:left-0 hover:after:w-full"
-        >
-          Sign In
-        </Link>
+        {/* Sign Out */}
       </div>
     </nav>
   );
 };
 
 export default Navbar;
+
+/* <Link
+      href="/login"
+      className="relative font-medium text-gray-600 transition-all duration-300 hover:bg-gradient-to-r hover:from-teal-600 hover:to-red-600  hover:bg-clip-text hover:text-transparent after:content-[''] after:absolute after:left-1/2 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-teal-500 after:to-red-500 after:transition-all after:duration-300 hover:after:left-0 hover:after:w-full"
+    >
+      Sign In
+    </Link>
+*/
