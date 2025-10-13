@@ -1,10 +1,11 @@
 import { auth } from "@clerk/nextjs/server";
 
 const TestPage = async () => {
+  // Destructure from Clerk
   const { getToken } = await auth();
 
   const token = await getToken();
-  console.log("clerk token = ", token);
+  //console.log("clerk token = ", token);
 
   // Product service Authenticated
   const resProduct = await fetch("http://localhost:8000/test", {
