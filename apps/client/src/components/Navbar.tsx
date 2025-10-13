@@ -1,14 +1,32 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import SearchBar from "./SearchBar";
 import { Bell, Home } from "lucide-react";
 import ShoppingCartIcon from "./ShoppingCartIcon";
-import { SignedOut, SignInButton, SignedIn, UserButton } from "@clerk/nextjs";
+import { SignedOut, SignInButton, SignedIn } from "@clerk/nextjs";
+import { useEffect, useState } from "react";
+import ProfileButton from "./ProfileButton";
 
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10); // adjust threshold if needed
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="w-full flex items-center justify-between pb-4 border-b border-gray-200">
+    <nav
+      className={`w-full bg-white/95 backdrop-blur-sm flex items-center justify-between border-b border-gray-200 sticky top-0 z-50 transition-all duration-300 ${
+        scrolled ? "py-4 px-1 shadow-md border-none" : "pb-4"
+      }`}
+    >
       {/* Left */}
       <Link href="/" className="flex items-center">
         <Image
@@ -52,7 +70,7 @@ const Navbar = () => {
 
         {/* Sign Out */}
         <SignedIn>
-          <UserButton />
+          <ProfileButton />
         </SignedIn>
         {/* Sign Out */}
       </div>
