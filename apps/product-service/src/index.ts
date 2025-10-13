@@ -10,6 +10,7 @@ app.use(
   })
 );
 
+// Clerk & Express Middleware
 app.use(clerkMiddleware());
 
 app.get("/health", (req: Request, res: Response) => {
@@ -20,9 +21,15 @@ app.get("/health", (req: Request, res: Response) => {
   });
 });
 
+// Authenticate with Clerk & Express
 app.get("/test", (req, res) => {
   const auth = getAuth(req);
-  console.log(auth);
+  //console.log(auth);
+
+  const userId = auth.userId;
+  if (!userId) {
+    return res.status(401).json({ message: "You are not logged in!" });
+  }
 
   res.json({ message: "Product service authenticated" });
 });
