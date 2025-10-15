@@ -1,7 +1,7 @@
 {
   "name": "product-service",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is product service backend.",
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
@@ -9,16 +9,17 @@
     "check-types": "tsc --noEmit"
   },
   "keywords": [],
-  "author": "",
+  "author": "Md Sofian Hasan",
   "license": "ISC",
-  "devDependencies": {
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.3"
-  },
   "dependencies": {
     "@clerk/express": "^1.7.37",
-    "@repo/typescript-config": "workspace:*",
     "cors": "^2.8.5",
-    "express": "^5.0.3"
+    "express": "^5.0.3",
+    "@repo/product-db": "workspace:*"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3"
   }
 }
