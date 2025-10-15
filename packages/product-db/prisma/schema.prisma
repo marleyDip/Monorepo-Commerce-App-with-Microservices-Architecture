@@ -1,0 +1,186 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id               Int      @id @default(autoincrement())
+  name             String
+  shortDescription String
+  description      String
+  price            Int
+  sizes            String[]
+  colors           String[]
+  images           Json
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  categorySlug     String
+  category         Category @relation(fields: [categorySlug], references: [slug])
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  slug     String    @unique
+  products Product[]
+}
+
+/**
+ * This schema models a one-to-many relationship (Category → Product).
+ * It uses a string slug as the foreign key instead of a numeric ID.
+ * Prisma automatically gives you relational queries like:
+ * const products = await prisma.category.findUnique({
+ * where: { slug: "shoes" },
+ * include: { products: true },
+ * });
+ */
+
+/**
+ * A Category has many Products
+ * → Category.products
+ * Each Product belongs to one Category
+ * → Product.category
+ * They are linked using:
+ * @relation(fields: [categorySlug], references: [slug])
+ * So the product table stores the categorySlug, which refers to the slug field in Category.
+ * Category Table
+ * id	name	slug
+ * 1	Shoes	shoes
+ * 2	Jackets	jackets
+ * Product Table
+ * id	name	categorySlug
+ * 1	Nike Air	shoes
+ * 2	Denim Jacket	jackets
+ */
+
+/**
+ * Product categorySlug	String	A foreign key that matches Category.slug.
+ * Product category	Category	The relation — defines which category this product belongs to.
+ * Category slug	String	A URL-friendly identifier (e.g. "shoes"). Must be unique.
+ * Category products	Product[]	One-to-many relation — one category can have many products.
+ */
+
+// (onDelete: Restrict (default), Cascade, SetNull)  Category = model Category slug => primary key & model Product categorySlug => foreign key
+// Did not directly delete category without delete specific product which contains category
+/**
+ * Right now, your Product ↔ Category relationship is defined like this:
+ * model Product {
+ * categorySlug String
+ * category     Category @relation(fields: [categorySlug], references: [slug])
+ * }
+ * But you didn’t specify what happens when a category is deleted.
+ * So, by default, Prisma sets:
+ * onDelete: Restrict
+ * That means:
+ * You cannot delete a category if any product still references it.
+ * Prisma (and the underlying database) will throw an error like:
+ * Foreign key constraint failed on the field: Product_categorySlug_fkey
+ */
+
+/**
+ * ⚙️ Option 1: onDelete: Restrict (default)
+ * Behavior:
+ * ❌ Prevents category deletion if products exist in that category.
+ * ✅ Protects data consistency (no “orphan” products).
+ * Example:
+ * model Product {
+ * categorySlug String
+ * category     Category @relation(fields: [categorySlug], references: [slug], onDelete: Restrict)
+ * }
+ * If you try:
+ * await prisma.category.delete({ where: { slug: 'shoes' } })
+ * and products exist → you’ll get an error.
+ */
+
+/**
+ * ⚙️ Option 2: onDelete: Cascade
+ * Behavior:
+ * ✅ Automatically deletes all products that belong to the deleted category.
+ * ⚠️ Dangerous if done unintentionally — you’ll lose product data.
+ * Example:
+ * model Product {
+ * categorySlug String
+ * category     Category @relation(fields: [categorySlug], references: [slug], onDelete: Cascade)
+ * }
+ * When you run:
+ * await prisma.category.delete({ where: { slug: 'shoes' } })
+ * → Prisma will also delete all related products automatically.
+ */
+
+/**
+ * ⚙️ Option 3: onDelete: SetNull
+ * Behavior:
+ * When a category is deleted, all linked products will have categorySlug = null.
+ * Useful if you want to keep the products but remove the category link.
+ * But you must first allow categorySlug to be nullable:
+ * model Product {
+ * categorySlug String?
+ * category     Category? @relation(fields: [categorySlug], references: [slug], onDelete: SetNull)
+ * }
+ */
+
+/**
+ * 🔍 Which Option to Choose?
+ * Case	Recommended Option	Why
+ * You want strict data safety...Restrict (default)...Prevents accidental mass deletions
+ * You want automatic cleanup...Cascade...Removes all related products automatically
+ * You want to keep products but unlink them...SetNull...Keeps product data intact
+ */
+
+/**
+ * two models: Product and Category.
+ * These models describe how data will be stored in your database and how they’re related.
+ * 🧩 1. Category Model
+ * model Category {
+ * id       Int       @id @default(autoincrement())
+ * name     String
+ * slug     String    @unique
+ * products Product[]
+ * }
+ * Explanation:
+ * Field	Type	Description
+ * id	Int	Primary key. Auto-incrementing unique ID for each category.
+ * name	String	The category name (e.g. "Shoes", "Furniture").
+ * slug	String	A URL-friendly identifier (e.g. "shoes"). Must be unique.
+ * products	Product[]	One-to-many relation — one category can have many products.
+ * 🧩 2. Product Model
+ * model Product {
+ * id               Int      @id @default(autoincrement())
+ * name             String
+ * shortDescription String
+ * description      String
+ * price            Int
+ * sizes            String[]
+ * colors           String[]
+ * images           Json
+ * createdAt        DateTime @default(now())
+ * updatedAt        DateTime @updatedAt
+ * categorySlug     String
+ * category         Category @relation(fields: [categorySlug], references: [slug])
+ * }
+ * Explanation:
+ * Field	Type	Description
+ * id	Int	Primary key — unique identifier for each product.
+ * name	String	Product name (e.g. "Leather Jacket").
+ * shortDescription	String	A short summary for listings/previews.
+ * description	String	A detailed description of the product.
+ * price	Int	Price of the product (usually in smallest currency unit, e.g. cents).
+ * sizes	String[]	An array of size options (e.g. ["S", "M", "L"]).
+ * colors	String[]	An array of available colors (e.g. ["red", "black"]).
+ * images	Json	Stores one or more image URLs/objects as JSON (flexible type).
+ * createdAt	DateTime	Automatically set to the current date/time when product is created.
+ * updatedAt	DateTime	Automatically updated whenever the product is modified.
+ * categorySlug	String	A foreign key that matches Category.slug.
+ * category	Category	The relation — defines which category this product belongs to.
+ */
