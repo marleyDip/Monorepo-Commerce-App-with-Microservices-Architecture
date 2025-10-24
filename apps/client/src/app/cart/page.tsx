@@ -2,13 +2,18 @@
 
 import PaymentForm from "@/components/PaymentForm";
 import ShippingForm from "@/components/ShippingForm";
+
 import useCartStore from "@/stores/cartStore";
-import { CartItemsType, ShippingFormInputs } from "@/types";
-import { ArrowRight, Trash2 } from "lucide-react";
+
+import { CartItemsType, ShippingFormInputs } from "@repo/types";
+
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
+
 import { useState } from "react";
+
 import { toast } from "react-toastify";
+import { ArrowRight, Trash2 } from "lucide-react";
 
 const steps = [
   {
@@ -118,7 +123,11 @@ const CartPage = () => {
                   {/* Image */}
                   <div className="relative w-32 h-32 bg-gray-50 rounded-lg hover:object-cover overflow-hidden cursor-pointer">
                     <Image
-                      src={item.images?.[item.selectedColor] || ""}
+                      src={
+                        (item.images as Record<string, string>)?.[
+                          item.selectedColor
+                        ] || ""
+                      }
                       alt={item.name}
                       fill
                       className="object-contain hover:scale-105 active:scale-100 transition-all duration-200"

@@ -18,27 +18,27 @@ app.get("/health", (c) => {
 });
 
 // Create Stripe Product
-app.post("/create-stripe-product", async (c) => {
-  const res = await stripe.products.create({
-    id: "124",
-    name: "Test Product",
-    default_price_data: {
-      currency: "bdt",
-      unit_amount: 10 * 100,
-    },
-  });
+// app.post("/create-stripe-product", async (c) => {
+//   const res = await stripe.products.create({
+//     id: "124",
+//     name: "Test Product",
+//     default_price_data: {
+//       currency: "bdt",
+//       unit_amount: 10 * 100,
+//     },
+//   });
 
-  return c.json(res);
-});
+//   return c.json(res);
+// });
 
 // Fetch Stripe Product Price
-app.get("/stripe-product-price", async (c) => {
-  const res = await stripe.prices.list({
-    product: "123",
-  });
+// app.get("/stripe-product-price", async (c) => {
+//   const res = await stripe.prices.list({
+//     product: "123",
+//   });
 
-  return c.json(res);
-});
+//   return c.json(res);
+// });
 
 // Authenticate with Clerk & & Hono
 // app.get("/pay", shouldBeUser, async (c) => {

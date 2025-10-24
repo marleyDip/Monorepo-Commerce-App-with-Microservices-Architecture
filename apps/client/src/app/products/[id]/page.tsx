@@ -1,5 +1,5 @@
 import ProductionInteraction from "@/components/ProductionInteraction";
-import { ProductType } from "@/types";
+import { ProductType } from "@repo/types";
 import Image from "next/image";
 //import { metadata } from "../../layout";
 
@@ -18,6 +18,9 @@ const product: ProductType = {
     purple: "/products/1p.png",
     green: "/products/1gr.png",
   },
+  categorySlug: "test",
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 const productPage = async ({
@@ -37,7 +40,9 @@ const productPage = async ({
       {/* Image */}
       <div className="w-full lg:w-5/12 relative aspect-[2/3] hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200 cursor-pointer">
         <Image
-          src={product.images?.[selectedColor] || ""}
+          src={
+            (product.images as Record<string, string>)?.[selectedColor] || ""
+          }
           alt={product.name}
           fill
           className="object-contain rounded-md"
