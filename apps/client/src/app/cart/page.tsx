@@ -14,6 +14,7 @@ import { useState } from "react";
 
 import { toast } from "react-toastify";
 import { ArrowRight, Trash2 } from "lucide-react";
+import StripePaymentForm from "@/components/StripePaymentForm";
 
 const steps = [
   {
@@ -175,7 +176,8 @@ const CartPage = () => {
           ) : activeStep === 2 ? (
             <ShippingForm setShippingForm={setShippingForm} />
           ) : activeStep === 3 && shippingForm ? (
-            <PaymentForm />
+            //<PaymentForm />
+            <StripePaymentForm shippingForm={shippingForm} />
           ) : (
             <p className="text-sm font-medium text-gray-500">
               Please fill in the shipping form to Continue.

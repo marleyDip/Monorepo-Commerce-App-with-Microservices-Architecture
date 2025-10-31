@@ -57,7 +57,7 @@ const products: ProductsType = [
     updatedAt: new Date(),
   },
   {
-    id: 4,
+    id: 123,
     name: "Nike Dri Flex T-Shirt",
     shortDescription: "Performance tee designed to move with you.",
     description:

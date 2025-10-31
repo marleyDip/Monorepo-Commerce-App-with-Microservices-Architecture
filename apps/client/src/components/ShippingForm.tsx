@@ -41,6 +41,7 @@ const ShippingForm = ({
             id="name"
             type="text"
             placeholder="Marley Dip"
+            value="Marley Dip"
             {...register("name")}
             className="w-full border-b border-gray-200 py-2 text-sm placeholder:text-neutral-400 focus:outline-none peer"
           />
@@ -63,6 +64,7 @@ const ShippingForm = ({
             id="email"
             type="email"
             placeholder="marleyDip@gmail.com"
+            value="marleyDip@gmail.com"
             {...register("email")}
             className="w-full border-b border-gray-200 py-2 text-sm placeholder:text-neutral-400 focus:outline-none peer"
           />
@@ -85,6 +87,7 @@ const ShippingForm = ({
             id="phone"
             type="text"
             placeholder="0123456789"
+            value="0123456789"
             {...register("phone")}
             className="w-full border-b border-gray-200 py-2 text-sm placeholder:text-neutral-400 focus:outline-none peer"
           />
@@ -107,6 +110,7 @@ const ShippingForm = ({
             id="address"
             type="text"
             placeholder="Somespur, Belkuchi"
+            value="Somespur, Belkuchi"
             {...register("address")}
             className="w-full border-b border-gray-200 py-2 text-sm placeholder:text-neutral-400 focus:outline-none peer"
           />
@@ -129,6 +133,7 @@ const ShippingForm = ({
             id="city"
             type="text"
             placeholder="Sirajganj"
+            value="Sirajganj"
             {...register("city")}
             className="w-full border-b border-gray-200 py-2 text-sm placeholder:text-neutral-400 focus:outline-none peer"
           />
